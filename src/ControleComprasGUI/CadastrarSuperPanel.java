@@ -1,4 +1,5 @@
 package ControleComprasGUI;
+
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 
@@ -9,45 +10,46 @@ import javax.swing.JTextField;
 
 
 import ControleCompras.POJO.Produto;
+import ControleCompras.POJO.Supermercado;
 import ControleComprasGUI.Action.CadastrarProdutoAction;
 import ControleComprasGUI.Action.CadastrarProdutoCancelarAction;
+import ControleComprasGUI.Action.CadastrarSuperAction;
+import ControleComprasGUI.Action.CadastrarSuperCancelarAction;
 
 /**
  * 
  *
  *
  */
-public class CadastrarProdutoPanel extends JPanel {
+public class CadastrarSuperPanel extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//private int a,b,c;
+	
 	private JTextField id;
 	private JTextField nome;
-	private JTextField preco;
-	private JTextField id_super;
+	
 	/**
 	 * 
 	 * @return
 	 */
-	public Produto getProduto() {
-		return new Produto(Integer.parseInt(id.getText()), nome.getText(),Integer.parseInt(preco.getText()),Integer.parseInt(id_super.getText()));
+	public Supermercado getSuper() {
+		return new Supermercado(Integer.parseInt(id.getText()), nome.getText());
 	}
 
 	public void clear() {
 		id.setText("");
 		nome.setText("");
-		preco.setText("");
-		id_super.setText("");
+		
 	}
 
 
 	/**
 	 * 
 	 */
-	public CadastrarProdutoPanel() {
+	public CadastrarSuperPanel() {
 		JLabel label;
 
 		setLayout(new FlowLayout());
@@ -64,27 +66,16 @@ public class CadastrarProdutoPanel extends JPanel {
 		label.setLabelFor(nome);
 		add(nome);
 
-		label = new JLabel("Preco");
-		add(label);
-		preco = new JTextField(10);
-		label.setLabelFor(preco);
-		add(preco);
-		
-		label = new JLabel("id_super");
-		add(label);
-		id_super = new JTextField(10);
-		label.setLabelFor(id_super);
-		add(id_super);
 
 		JButton button;
 
-		button = new JButton(new CadastrarProdutoAction(this));
-		button.setToolTipText("Cadastrar produto");
+		button = new JButton(new CadastrarSuperAction(this));
+		button.setToolTipText("Cadastrar supermercado");
 		button.setMnemonic(KeyEvent.VK_C);
 		add(button);
 
-		button = new JButton(new CadastrarProdutoCancelarAction(this));
-		button.setToolTipText("Cancelar cadastro da conta");
+		button = new JButton(new CadastrarSuperCancelarAction(this));
+		button.setToolTipText("Cancelar cadastro do supermercado");
 		button.setMnemonic(KeyEvent.VK_N);
 		add(button);		
 	}

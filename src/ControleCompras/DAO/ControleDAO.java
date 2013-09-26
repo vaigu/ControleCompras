@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 import ControleCompras.POJO.Produto;
+import ControleCompras.POJO.Supermercado;
 
 
 
@@ -104,4 +105,48 @@ public class ControleDAO {
 			}
 		}
 	}
+
+
+
+
+public void insertSupermercado(Supermercado supermercado) {
+	String cmd = "insert into supermercado(id_prod, nome,) values (?, ?,)";
+
+	Connection db = null;
+	PreparedStatement st = null;
+
+	try {
+		// abrir conexão
+		Properties props = new Properties();
+		props.load(new FileInputStream("controlecompras.properties"));
+		String url = props.getProperty("url");
+
+		db = DriverManager.getConnection(url, props);
+
+		st = db.prepareStatement(cmd);
+		st.setInt(1, supermercado.getSuperID());
+		st.setString(2, supermercado.getNome());
+		int r = st.executeUpdate();
+
+		if (r != 1) {
+			throw new RuntimeException("Erro ao inserir");
+		}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (st != null) {
+				st.close();
+			}
+			if (db != null) {
+				db.close();
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+		}
+	}
+}
+
+
 }
