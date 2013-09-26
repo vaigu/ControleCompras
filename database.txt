@@ -1,0 +1,19 @@
+Controlo de compras supermercado
+
+
+cadastro de produtos
+
+
+INSERT INTO produtos(
+            id_prod, nome, preco, id_super_fk)
+    VALUES (?, ?, ?, ?);
+
+
+
+deve localizar produto por nome
+
+select * from produtos where nome ='ceva'
+
+
+
+
