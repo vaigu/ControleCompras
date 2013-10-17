@@ -1,9 +1,11 @@
 package ControleComprasGUI;
 
+import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -30,11 +32,25 @@ public class CadastrarSuperPanel extends JPanel {
 	
 	private JTextField id;
 	private JTextField nome;
+	private JFrame frame;
+	private CardLayout card;
 	
 	/**
 	 * 
 	 * @return
 	 */
+	
+	public JFrame getFrame() {
+		// TODO Auto-generated method stub
+		return frame;
+	}
+
+	public CardLayout getCard() {
+		// TODO Auto-generated method stub
+		return card;
+	}
+	
+	
 	public Supermercado getSuper() {
 		return new Supermercado(Integer.parseInt(id.getText()), nome.getText());
 	}
@@ -49,9 +65,10 @@ public class CadastrarSuperPanel extends JPanel {
 	/**
 	 * 
 	 */
-	public CadastrarSuperPanel() {
+	public CadastrarSuperPanel(JFrame frame, CardLayout card){
 		JLabel label;
-
+		this.frame=frame;
+		this.card=card;
 		setLayout(new FlowLayout());
 
 		label = new JLabel("ID");

@@ -2,6 +2,7 @@ package ControleCompras.Test;
 
 import ControleCompras.DAO.ControleDAO;
 import ControleCompras.POJO.Produto;
+import ControleCompras.POJO.Supermercado;
 
 public class ControleDAOTest {
 	
@@ -13,8 +14,8 @@ public class ControleDAOTest {
 			ControleDAO dao = new ControleDAO();
 			System.out.println(dao.MostrarProduto("ceva"));
 
-			Produto p = new Produto(1,"teste",10,1);
-			dao.insertProduto(p);
+			Supermercado p = new Supermercado(1,"teste");
+			dao.insertSupermercado(p);
 
 			System.out.println(dao.MostrarProduto("teste"));
 

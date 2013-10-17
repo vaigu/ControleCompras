@@ -1,18 +1,22 @@
 package ControleCompras.DAO;
 
+
+import java.util.List;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import ControleCompras.POJO.ListaProduto;
 import ControleCompras.POJO.Produto;
 import ControleCompras.POJO.Supermercado;
 
 
-
 public class ControleDAO {
+
 
 	public Produto MostrarProduto (String nome) {
 		Produto produto = null;
@@ -110,7 +114,7 @@ public class ControleDAO {
 
 
 public void insertSupermercado(Supermercado supermercado) {
-	String cmd = "insert into supermercado(id_prod, nome,) values (?, ?,)";
+	String cmd = "insert into supermercado(id_, nome) values (?, ?)";
 
 	Connection db = null;
 	PreparedStatement st = null;
@@ -149,4 +153,69 @@ public void insertSupermercado(Supermercado supermercado) {
 }
 
 
+
+
+
+public List <ListaProduto> findByNomeProduto(String produto){
+	String cmd = "select * from produtos where nome= ?";
+	List <ListaProduto> lp = new ArrayList <ListaProduto>();
+	
+	Connection db = null;
+    PreparedStatement st = null;
+    ResultSet rs = null;
+
+    try {
+		// abrir conexão
+		Properties props = new Properties();
+		props.load(new FileInputStream("controlecompras.properties"));
+		String url = props.getProperty("url");
+
+		db = DriverManager.getConnection(url, props);
+
+		st = db.prepareStatement(cmd);
+		st.setInt(1,1);
+		
+		int r = st.executeUpdate();
+		
+		while (rs.next()) {
+            String nome  = rs.getString(2);
+            double preço = rs.getInt(3);
+            int supermercado = rs.getInt(4); 
+            
+            lp.add(new ListaProduto(nome,preço,supermercado));
+		 } 
+		
+     }catch (Exception e) {
+             e.printStackTrace();
+     } finally {
+             try {
+                     if (rs != null) {
+                             rs.close();
+                     }
+                     if (st != null) {
+                             st.close();
+                     }
+                     if (db != null) {
+                             db.close();
+                     }
+             } catch (Exception e2) {
+                     e2.printStackTrace();
+             }
+     }
+     return lp;
 }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

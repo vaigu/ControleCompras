@@ -1,6 +1,8 @@
 package ControleComprasGUI;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -11,9 +13,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import ControleComprasGUI.Action.ProdutoAction;
 import ControleComprasGUI.Action.SairAction;
 import ControleComprasGUI.Action.SobreAction;
-
+import ControleComprasGUI.Action.SuperAction;
 
 public class ControleSwing {
 	/**
@@ -22,6 +25,11 @@ public class ControleSwing {
 	 */
 	private static void createAndShowGUI() {
 		// Create and set up the window.
+		
+		CardLayout card = new CardLayout(0,0);
+		
+		
+		
 		JFrame frame = new JFrame("Controle de Rancho");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -32,6 +40,15 @@ public class ControleSwing {
 		arquivo.setMnemonic(KeyEvent.VK_A);
 		mb.add(arquivo);
 
+		JMenu cadastrar = new JMenu("Cadastrar");
+		cadastrar.setMnemonic(KeyEvent.VK_C);
+		mb.add(cadastrar);
+		
+		JMenuItem produto = new JMenuItem(new ProdutoAction(card, frame));
+		cadastrar.add(produto);
+		JMenuItem supermercado = new JMenuItem(new SuperAction(card, frame));
+		cadastrar.add(supermercado);
+		
 		JMenu ajuda = new JMenu("Ajuda");
 		ajuda.setMnemonic(KeyEvent.VK_U);
 		mb.add(ajuda);
@@ -46,10 +63,22 @@ public class ControleSwing {
 		ajuda.add(sobre);
 		sobre.setMnemonic(KeyEvent.VK_S);
 
-		JPanel panel = new CadastrarProdutoPanel();
+		
 
-		frame.getContentPane().add(panel);
+		
+		
+		
+		
+		frame.setLayout(card);
+		
+		frame.getContentPane().add(new Panel(), "Branco");
+		
+		JPanel panelCadProd = new CadastrarProdutoPanel(frame,card);
+		frame.getContentPane().add(panelCadProd, "Produto");
 
+		JPanel panelCadSuper = new CadastrarSuperPanel(frame,card);
+		frame.getContentPane().add(panelCadSuper, "Supermercado");
+		
 		frame.setPreferredSize(new Dimension(800, 200));
 		frame.pack();
 		frame.setVisible(true);

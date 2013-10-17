@@ -1,8 +1,10 @@
 package ControleComprasGUI;
+import java.awt.CardLayout;
 import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -24,6 +26,18 @@ public class CadastrarProdutoPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	//private int a,b,c;
+	public JFrame getFrame() {
+		// TODO Auto-generated method stub
+		return frame;
+	}
+
+	public CardLayout getCard() {
+		// TODO Auto-generated method stub
+		return card;
+	}
+	
+	private JFrame frame;
+	private CardLayout card;
 	private JTextField id;
 	private JTextField nome;
 	private JTextField preco;
@@ -47,9 +61,13 @@ public class CadastrarProdutoPanel extends JPanel {
 	/**
 	 * 
 	 */
-	public CadastrarProdutoPanel() {
+	public CadastrarProdutoPanel(JFrame frame,CardLayout card) {
 		JLabel label;
 
+		this.frame = frame;
+		this.card = card;
+		
+	
 		setLayout(new FlowLayout());
 
 		label = new JLabel("ID");
@@ -84,8 +102,10 @@ public class CadastrarProdutoPanel extends JPanel {
 		add(button);
 
 		button = new JButton(new CadastrarProdutoCancelarAction(this));
-		button.setToolTipText("Cancelar cadastro da conta");
+		button.setToolTipText("Cancelar cadastro do produto");
 		button.setMnemonic(KeyEvent.VK_N);
 		add(button);		
 	}
+
+	
 }
