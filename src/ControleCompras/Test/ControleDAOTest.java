@@ -12,12 +12,14 @@ public class ControleDAOTest {
 		public static void main(String[] args) {
 			
 			ControleDAO dao = new ControleDAO();
-			System.out.println(dao.MostrarProduto("ceva"));
+			//System.out.println(dao.MostrarProduto("ceva"));
 
-			Supermercado p = new Supermercado(1,"teste");
-			dao.insertSupermercado(p);
+			//Supermercado p = new Supermercado(1,"teste");
+			//dao.insertSupermercado(p);
 
 			System.out.println(dao.MostrarProduto("teste"));
+			
+			System.out.println(dao.findByNomeProduto("ceva"));
 
 		}
 

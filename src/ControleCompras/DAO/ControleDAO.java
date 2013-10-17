@@ -173,16 +173,19 @@ public List <ListaProduto> findByNomeProduto(String produto){
 		db = DriverManager.getConnection(url, props);
 
 		st = db.prepareStatement(cmd);
-		st.setInt(1,1);
+		st.setString(1,produto);
 		
-		int r = st.executeUpdate();
+		 rs = st.executeQuery();
 		
 		while (rs.next()) {
-            String nome  = rs.getString(2);
-            double preço = rs.getInt(3);
-            int supermercado = rs.getInt(4); 
+			int id  = rs.getInt(1);
+			String nome  = rs.getString(2);
+			double preço = rs.getDouble(3);
+			int supermercado = rs.getInt(4);
+			
+             
             
-            lp.add(new ListaProduto(nome,preço,supermercado));
+            lp.add(new ListaProduto(preço,supermercado,nome));
 		 } 
 		
      }catch (Exception e) {

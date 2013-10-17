@@ -7,11 +7,12 @@ public class ListaProduto {
 	private double preço;
 	private int supermercado;
 	
-	public ListaProduto(String nome, double preço, int supermercado) {
+	public ListaProduto(double preço, int supermercado,String nome ) {
 	
-		this.nome = nome;
 		this.preço = preço;
 		this.supermercado = supermercado;
+		this.nome = nome;
+		
 	}
 	
 	
@@ -32,11 +33,14 @@ public class ListaProduto {
 
 
 
+
 	@Override
 	public String toString() {
 		return "ListaProduto [nome=" + nome + ", preço=" + preço
 				+ ", supermercado=" + supermercado + "]";
 	}
+
+
 	
 	
 	
