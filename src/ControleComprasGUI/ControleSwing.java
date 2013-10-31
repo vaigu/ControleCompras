@@ -3,6 +3,7 @@ package ControleComprasGUI;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Panel;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -13,6 +14,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import ControleComprasGUI.Action.ListaProdutoAction;
 import ControleComprasGUI.Action.ProdutoAction;
 import ControleComprasGUI.Action.SairAction;
 import ControleComprasGUI.Action.SobreAction;
@@ -32,6 +34,8 @@ public class ControleSwing {
 		
 		JFrame frame = new JFrame("Controle de Rancho");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(
+        ControleSwing.class.getResource("/ControleComprasGUI/Cart-icon.png")));
 
 		JMenuBar mb = new JMenuBar();
 		frame.setJMenuBar(mb);
@@ -44,6 +48,13 @@ public class ControleSwing {
 		cadastrar.setMnemonic(KeyEvent.VK_C);
 		mb.add(cadastrar);
 		
+		JMenu listar = new JMenu("Listar");
+		cadastrar.setMnemonic(KeyEvent.VK_L);
+		mb.add(listar);
+		
+		JMenuItem listaproduto = new JMenuItem(new ListaProdutoAction(frame, card));
+		listar.add(listaproduto);
+	
 		JMenuItem produto = new JMenuItem(new ProdutoAction(card, frame));
 		cadastrar.add(produto);
 		JMenuItem supermercado = new JMenuItem(new SuperAction(card, frame));
@@ -56,17 +67,11 @@ public class ControleSwing {
 		JMenuItem sair = new JMenuItem(new SairAction());
 		arquivo.add(sair);
 		sair.setMnemonic(KeyEvent.VK_S);
-		sair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-				ActionEvent.CTRL_MASK));
+		sair.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,ActionEvent.CTRL_MASK));
 
 		JMenuItem sobre = new JMenuItem(new SobreAction(frame));
 		ajuda.add(sobre);
 		sobre.setMnemonic(KeyEvent.VK_S);
-
-		
-
-		
-		
 		
 		
 		frame.setLayout(card);
@@ -78,6 +83,9 @@ public class ControleSwing {
 
 		JPanel panelCadSuper = new CadastrarSuperPanel(frame,card);
 		frame.getContentPane().add(panelCadSuper, "Supermercado");
+		
+		JPanel JListaProdutoPanel = new JListaProdutoPanel(frame, card);
+		frame.getContentPane().add(JListaProdutoPanel, "ListaProduto");
 		
 		frame.setPreferredSize(new Dimension(800, 200));
 		frame.pack();

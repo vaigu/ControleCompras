@@ -9,11 +9,10 @@ import ControleCompras.POJO.ListaProduto;
 
 public class MyTableModel extends AbstractTableModel {
 
-    private String produto;
+  
     private List<ListaProduto> lp;
 
     public MyTableModel(String produto) {
-            this.produto = produto;
             ControleDAO dao = new ControleDAO();
             lp = dao.findByNomeProduto(produto);
     }
